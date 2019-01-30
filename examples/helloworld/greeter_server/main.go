@@ -42,6 +42,12 @@ func (s *server) SayHello(ctx context.Context, in *pb.HelloRequest) (*pb.HelloRe
 	return &pb.HelloReply{Message: "Hello " + in.Name}, nil
 }
 
+// SayHelloAgain implements helloworld.GreeterServer
+func (s *server) SayHelloAgain(ctx context.Context, in *pb.HelloRequest) (*pb.HelloReply, error) {
+	log.Printf("Received: %v", in.Name)
+	return &pb.HelloReply{Message: "Hello " + in.Name + " Again"}, nil
+}
+
 func main() {
 	lis, err := net.Listen("tcp", port)
 	if err != nil {
